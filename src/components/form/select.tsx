@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions */
 "use client";
-
 import Select, {
   type StylesConfig,
   type CSSObjectWithLabel,
 } from "react-select";
+import { type Months } from "@/utils";
 
 interface Props {
-  opts: any[];
+  opts: readonly Months[];
   instanceId: number;
   onChange: any;
   value: any;

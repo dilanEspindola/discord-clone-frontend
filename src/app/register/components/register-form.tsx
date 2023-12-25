@@ -1,68 +1,26 @@
 "use client";
-import { useForm, Controller } from "react-hook-form";
-import { ButtonForm, Input, SelectComponent } from "@/components/form";
 import { useEffect, useState, useMemo } from "react";
+import Link from "next/link";
+import { useForm, Controller } from "react-hook-form";
+import { ButtonForm, Input, SelectComponent, Label } from "@/components/form";
+
+import { MONTHS } from "@/utils";
+import { PUBLIC_ROUTES } from "@/routes";
+
+interface ISelectOptions {
+  value: string | number;
+  label: string;
+}
 
 export interface Register {
   email: string;
-  fullname: string;
+  nameShowing: string;
   username: string;
   password: string;
-  month: string;
-  day: string;
-  year: string;
+  month: ISelectOptions;
+  day: ISelectOptions;
+  year: ISelectOptions;
 }
-
-export const MONTHS = [
-  {
-    value: "January",
-    label: "January",
-  },
-  {
-    value: "February",
-    label: "February",
-  },
-  {
-    value: "March",
-    label: "March",
-  },
-  {
-    value: "April",
-    label: "April",
-  },
-  {
-    value: "May",
-    label: "May",
-  },
-  {
-    value: "June",
-    label: "June",
-  },
-  {
-    value: "July",
-    label: "July",
-  },
-  {
-    value: "August",
-    label: "August",
-  },
-  {
-    value: "September",
-    label: "September",
-  },
-  {
-    value: "October",
-    label: "October",
-  },
-  {
-    value: "November",
-    label: "November",
-  },
-  {
-    value: "December",
-    label: "December",
-  },
-];
 
 interface State {
   value: number;
@@ -70,7 +28,12 @@ interface State {
 }
 
 export const RegisterForm = () => {
-  const { register, handleSubmit, control } = useForm<Register>({});
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Register>({});
   const [years, setYears] = useState<State[]>();
   const [days, setDays] = useState<State[]>();
 
@@ -110,59 +73,89 @@ export const RegisterForm = () => {
     setDays(getDays());
   }, []);
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = (data: Register) => {
+    console.log(data.year);
   };
+
+  // console.log(errors);
 
   return (
     <div className="self-start w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <div className="flex flex-col gap-2 text-gray-300">
-          <label htmlFor="">Email address *</label>
+          <Label
+            error={errors.email ? errors.email.message : ""}
+            labelName="Email"
+          />
           <Input
             register={{
-              ...register("email", { required: "Email is required" }),
+              ...register("email", { required: "required" }),
             }}
             type="text"
           />
         </div>
 
         <div className="flex flex-col gap-2 text-gray-300">
-          <label htmlFor="">Fullname *</label>
+          <Label
+            error={errors.nameShowing ? errors.nameShowing.message : ""}
+            labelName="Name to display"
+          />
           <Input
             type="text"
             register={{
-              ...register("fullname", { required: "Fullname is required" }),
+              ...register("nameShowing", {
+                required: "required",
+              }),
             }}
           />
         </div>
 
         <div className="flex flex-col gap-2 text-gray-300">
-          <label htmlFor="">Username *</label>
+          <Label
+            error={errors.username ? errors.username.message : ""}
+            labelName="Username"
+          />
           <Input
             register={{
-              ...register("username", { required: "Username is required" }),
+              ...register("username", { required: "required" }),
             }}
             type="text"
           />
         </div>
 
         <div className="flex flex-col gap-2 text-gray-300">
-          <label htmlFor="">Password *</label>
+          <Label
+            error={errors.password ? errors.password.message : ""}
+            labelName="Password"
+          />
           <Input
             register={{
-              ...register("password", { required: "Password is required" }),
+              ...register("password", {
+                required: "required",
+                minLength: {
+                  value: 6,
+                  message: "must be 6 characters of length",
+                },
+              }),
             }}
             type="password"
           />
         </div>
 
         <div className="flex flex-col gap-2 text-gray-300">
-          <label htmlFor="">date of birth *</label>
+          <Label
+            error={
+              errors.day?.message ??
+              errors.month?.message ??
+              errors.year?.message
+            }
+            labelName="Date of birthday"
+          />
           <div className="grid grid-cols-3 space-x-3">
             <Controller
               control={control}
               name="month"
+              rules={{ required: "required" }}
               render={({ field: { onChange, value } }) => (
                 <SelectComponent
                   opts={MONTHS}
@@ -176,19 +169,27 @@ export const RegisterForm = () => {
             <Controller
               control={control}
               name="day"
-              render={({ field: { onChange, value } }) => (
-                <SelectComponent
-                  opts={days ?? []}
-                  instanceId={2}
-                  onChange={onChange}
-                  value={value}
-                  placeholder="day"
-                />
-              )}
+              rules={{ required: "required" }}
+              render={({
+                field: { onChange, value },
+                formState: { errors },
+              }) => {
+                console.log(errors);
+                return (
+                  <SelectComponent
+                    opts={days ?? []}
+                    instanceId={2}
+                    onChange={onChange}
+                    value={value}
+                    placeholder="day"
+                  />
+                );
+              }}
             />
             <Controller
               control={control}
               name="year"
+              rules={{ required: "required" }}
               render={({ field: { onChange, value } }) => (
                 <SelectComponent
                   opts={years ?? []}
@@ -205,7 +206,12 @@ export const RegisterForm = () => {
         <ButtonForm text="Continue" />
       </form>
 
-      <p className="text-blue-400 mt-6">Already have an account?</p>
+      <Link
+        className="text-blue-400 mt-6 inline-flex"
+        href={PUBLIC_ROUTES.lOGIN}
+      >
+        Already have an account?
+      </Link>
     </div>
   );
 };
