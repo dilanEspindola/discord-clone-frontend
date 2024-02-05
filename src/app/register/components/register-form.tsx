@@ -7,20 +7,9 @@ import { ButtonForm, Input, SelectComponent, Label } from "@/components/form";
 import { MONTHS } from "@/utils";
 import { PUBLIC_ROUTES } from "@/routes";
 
-interface ISelectOptions {
-  value: string | number;
-  label: string;
-}
-
-export interface Register {
-  email: string;
-  nameShowing: string;
-  username: string;
-  password: string;
-  month: ISelectOptions;
-  day: ISelectOptions;
-  year: ISelectOptions;
-}
+import type { Register } from "@/interfaces";
+import { registerDataParsed } from "../utils";
+import { registerUser } from "@/services";
 
 interface State {
   value: number;
@@ -73,11 +62,15 @@ export const RegisterForm = () => {
     setDays(getDays());
   }, []);
 
-  const onSubmit = (data: Register) => {
-    console.log(data.year);
+  const onSubmit = async (data: Register) => {
+    const dataParsed = registerDataParsed(data);
+    try {
+      const info = await registerUser(dataParsed);
+      console.log(info);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  // console.log(errors);
 
   return (
     <div className="self-start w-full">
@@ -156,15 +149,18 @@ export const RegisterForm = () => {
               control={control}
               name="month"
               rules={{ required: "required" }}
-              render={({ field: { onChange, value } }) => (
-                <SelectComponent
-                  opts={MONTHS}
-                  instanceId={1}
-                  onChange={onChange}
-                  value={value}
-                  placeholder="month"
-                />
-              )}
+              render={({ field: { onChange, value } }) => {
+                console.log(value);
+                return (
+                  <SelectComponent
+                    opts={MONTHS}
+                    instanceId={1}
+                    onChange={onChange}
+                    value={value}
+                    placeholder="month"
+                  />
+                );
+              }}
             />
             <Controller
               control={control}
@@ -174,7 +170,6 @@ export const RegisterForm = () => {
                 field: { onChange, value },
                 formState: { errors },
               }) => {
-                console.log(errors);
                 return (
                   <SelectComponent
                     opts={days ?? []}

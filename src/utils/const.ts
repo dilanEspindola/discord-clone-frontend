@@ -5,51 +5,51 @@ export type Months = {
 
 export const MONTHS: Readonly<Months[]> = [
   {
-    value: "January",
+    value: 1,
     label: "January",
   },
   {
-    value: "February",
+    value: 2,
     label: "February",
   },
   {
-    value: "March",
+    value: 3,
     label: "March",
   },
   {
-    value: "April",
+    value: 4,
     label: "April",
   },
   {
-    value: "May",
+    value: 5,
     label: "May",
   },
   {
-    value: "June",
+    value: 6,
     label: "June",
   },
   {
-    value: "July",
+    value: 7,
     label: "July",
   },
   {
-    value: "August",
+    value: 8,
     label: "August",
   },
   {
-    value: "September",
+    value: 9,
     label: "September",
   },
   {
-    value: "October",
+    value: 10,
     label: "October",
   },
   {
-    value: "November",
+    value: 11,
     label: "November",
   },
   {
-    value: "December",
+    value: 12,
     label: "December",
   },
 ] as const;
