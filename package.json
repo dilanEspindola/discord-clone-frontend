@@ -11,7 +11,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
     "axios": "^1.6.7",
-    "next": "14.0.4",
+    "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.49.2",
@@ -25,7 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.0.1",
-    "eslint-config-next": "14.0.4",
+    "eslint-config-next": "14.1.0",
     "eslint-config-standard-with-typescript": "^43.0.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
