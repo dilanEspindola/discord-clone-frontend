@@ -28,6 +28,8 @@ const customStyles: StylesConfig = {
     padding: "10px",
     maxHeight: "200px",
     overflow: "auto",
+    scrollbarWidth: "thin",
+    scrollbarColor: "#40384a #23272a",
   }),
   option: (base, state) => {
     return {

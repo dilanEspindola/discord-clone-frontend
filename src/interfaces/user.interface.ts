@@ -12,3 +12,8 @@ export interface Register {
   day: ISelectOptions;
   year: ISelectOptions;
 }
+
+export interface ILogin {
+  email: string;
+  password: string;
+}

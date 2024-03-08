@@ -27,4 +27,7 @@
       -moz-text-fill-color: #fff;
     }
   }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
 }
