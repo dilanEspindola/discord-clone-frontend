@@ -1,14 +1,17 @@
 import type { IDataRegister } from "@/app/register/utils";
+import { axiosInstance } from "@/interceptors";
+import type { ILogin, ILoginResponse } from '@/interfaces'
 
 export const registerUser = async (user: IDataRegister) => {
-  const res = await fetch("http://localhost:5000/api/auth/signup", {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-    method: "POST",
-  });
-  const data = await res.json();
+  const res = await axiosInstance.post("/auth/signup", user)
+  const data = await res.data;
 
   return data;
 };
+
+export const loginUser = async (login: ILogin): Promise<ILoginResponse> => {
+  const res = await axiosInstance.post("/auth/login", login)
+  const data = await res.data;
+
+  return data;
+}

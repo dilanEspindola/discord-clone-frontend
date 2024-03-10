@@ -1,9 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ButtonForm, Input, Label } from "@/components/form";
 import type { ILogin } from "@/interfaces";
 import { useForm } from "react-hook-form";
-import { PUBLIC_ROUTES } from "@/routes";
+import { PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/routes";
+import { loginUser } from "@/services";
 
 export const LoginForm = () => {
   const {
@@ -12,8 +14,17 @@ export const LoginForm = () => {
     handleSubmit,
   } = useForm<ILogin>();
 
+  const router = useRouter();
+
   const onSubmit = async (data: ILogin) => {
-    console.log(data);
+    try {
+      const { accesToken, user } = await loginUser(data);
+      router.push(PRIVATE_ROUTES.CHANNELS + "/@me");
+      localStorage.setItem("accesToken", accesToken);
+      console.log({ accesToken, user });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
