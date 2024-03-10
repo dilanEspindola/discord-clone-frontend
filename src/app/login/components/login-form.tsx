@@ -21,9 +21,10 @@ export const LoginForm = () => {
       const { accesToken, user } = await loginUser(data);
       router.push(PRIVATE_ROUTES.CHANNELS + "/@me");
       localStorage.setItem("accesToken", accesToken);
-      console.log({ accesToken, user });
+      return { accesToken, user };
+      // console.log({ accesToken, user });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

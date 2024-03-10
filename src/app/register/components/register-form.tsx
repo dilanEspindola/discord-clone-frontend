@@ -66,9 +66,10 @@ export const RegisterForm = () => {
     const dataParsed = registerDataParsed(data);
     try {
       const info = await registerUser(dataParsed);
-      console.log(info);
+      return info;
+      // console.log(info);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -150,7 +151,6 @@ export const RegisterForm = () => {
               name="month"
               rules={{ required: "required" }}
               render={({ field: { onChange, value } }) => {
-                console.log(value);
                 return (
                   <SelectComponent
                     opts={MONTHS}
