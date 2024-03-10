@@ -1,0 +1,12 @@
+name: discord-front
+
+on:
+  push:
+    branches: ["master"]
+
+jobs:
+  app:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: test workflow
+        run: echo "hello"
