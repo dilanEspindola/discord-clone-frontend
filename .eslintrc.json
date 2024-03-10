@@ -28,8 +28,8 @@
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-assertions": "off",
     "react/react-in-jsx-scope": "off",
-    "no-console": "error",
-    "@typescript-eslint/naming-convention": "off",
-    "@typescript-eslint/consistent-indexed-object-style": "off"
+    "no-console": "error"
+    // "@typescript-eslint/naming-convention": "off",
+    // "@typescript-eslint/consistent-indexed-object-style": "off"
   }
 }
