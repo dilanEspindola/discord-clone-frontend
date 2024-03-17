@@ -3,7 +3,6 @@ import Select, {
   type StylesConfig,
   type CSSObjectWithLabel,
 } from "react-select";
-// import { type Months } from "@/utils";
 
 interface Props {
   opts: readonly any[];
