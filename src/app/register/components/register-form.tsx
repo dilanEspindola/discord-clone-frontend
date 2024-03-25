@@ -73,6 +73,8 @@ export const RegisterForm = () => {
     }
   };
 
+  console.log(process.env.BACKEND_URL);
+
   return (
     <div className="self-start w-full">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">

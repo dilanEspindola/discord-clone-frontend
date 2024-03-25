@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { AxiosInterceptor } from "@/interceptors";
 import "./globals.css";
 
 export const runtime = "edge";
+
+AxiosInterceptor();
 
 export const metadata: Metadata = {
   title: "Create Next App",
