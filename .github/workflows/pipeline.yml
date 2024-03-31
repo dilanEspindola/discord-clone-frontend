@@ -35,3 +35,12 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Deploy to Cloudflare pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.GITHUB_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: discord-clone-frontend
+          directory: /.vercel/output/static
+          branch: master
