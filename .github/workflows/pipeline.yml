@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [18.x, 20.x]
+        node: [20.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -39,8 +39,8 @@ jobs:
       - name: Deploy to Cloudflare pages
         uses: cloudflare/pages-action@v1
         with:
-          apiToken: ${{ secrets.GITHUB_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          apiToken: lEyYPCx1xmvVT9BbFfYnSqx_liawRf9-VVLwbHNA
+          accountId: 3d6d8a46412c345c650d71c35464acc3
           projectName: discord-clone-frontend
           directory: /.vercel/output/static
           branch: master
