@@ -42,5 +42,5 @@ jobs:
           apiToken: lEyYPCx1xmvVT9BbFfYnSqx_liawRf9-VVLwbHNA
           accountId: 3d6d8a46412c345c650d71c35464acc3
           projectName: discord-clone-frontend
-          directory: .next && rm -rf .next/cache
+          directory: .vercel/output/static && rm -rf .next/cache
           branch: master
