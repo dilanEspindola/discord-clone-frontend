@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm, Controller } from "react-hook-form";
 import { ButtonForm, Input, SelectComponent, Label } from "@/components/form";
 
@@ -25,6 +26,7 @@ export const RegisterForm = () => {
   } = useForm<Register>({});
   const [years, setYears] = useState<State[]>();
   const [days, setDays] = useState<State[]>();
+  const router = useRouter();
 
   const getYears = useMemo(
     () => () => {
@@ -64,12 +66,13 @@ export const RegisterForm = () => {
 
   const onSubmit = async (data: Register) => {
     const dataParsed = registerDataParsed(data);
+
     try {
       const info = await registerUser(dataParsed);
+      router.replace("/channels/me");
       return info;
-      // console.log(info);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 
